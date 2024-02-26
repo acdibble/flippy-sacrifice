@@ -62,7 +62,10 @@ export default function Home() {
                 } catch {}
               }}
             ></input>
-            <button type="submit" className="bg-neutral-800 rounded-lg hover:bg-neutral-700">
+            <button
+              type="submit"
+              className="bg-neutral-800 rounded-lg transition hover:bg-red-700 hover:text-red-100"
+            >
               Sacrifice
             </button>
           </form>

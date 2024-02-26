@@ -23,7 +23,14 @@ const abi = [
 export default function Home() {
   const account = useAccount();
   const [input, setInput] = useState('');
+  const [checked, setChecked] = useState(false);
   const { writeContract, error, data } = useWriteContract();
+
+  useEffect(() => {
+    if (checked) {
+      window.open('https://youtu.be/O-fyNgHdmLI?si=EA5spTjUxqp-WnMU&t=20', '_blank');
+    }
+  }, [checked]);
 
   useEffect(() => {
     if (error) {
@@ -35,7 +42,19 @@ export default function Home() {
     <div className="flex-1 flex items-center justify-center">
       {account.isConnected ? (
         <div className="text-xl bg-neutral-900 py-2 px-3 rounded-lg flex flex-col gap-y-2">
-          <span>Enter your Flippy:</span>
+          <div className="flex items-center gap-x-4 justify-center">
+            <input
+              type="checkbox"
+              id="mood"
+              checked={checked}
+              onClick={() => {
+                setChecked(true);
+              }}
+            />
+            <label htmlFor="mood" className="text-center">
+              Set the mood
+            </label>
+          </div>
           <form
             className="flex flex-col gap-y-2"
             onSubmit={(e) => {
@@ -53,6 +72,7 @@ export default function Home() {
             }}
           >
             <input
+              placeholder="Enter your Flippy #"
               className="bg-neutral-800 rounded-lg px-2"
               pattern="[0-9]*"
               value={input}

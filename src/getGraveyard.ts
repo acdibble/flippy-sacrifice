@@ -1,5 +1,5 @@
 import { FLIPPY_NFT_CONTRACT, STATE_CHAIN_GATEWAY } from '@/consts';
-import { Network, Alchemy } from 'alchemy-sdk';
+import { Network, Alchemy, NftOrdering } from 'alchemy-sdk';
 
 export default async function getGraveyard() {
   const alchemy = new Alchemy({
@@ -9,6 +9,7 @@ export default async function getGraveyard() {
 
   const res = await alchemy.nft.getNftsForOwner(STATE_CHAIN_GATEWAY, {
     contractAddresses: [FLIPPY_NFT_CONTRACT],
+    orderBy: NftOrdering.TRANSFERTIME,
   });
 
   return res.ownedNfts;

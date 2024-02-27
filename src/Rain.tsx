@@ -3,11 +3,11 @@ import { useMemo } from 'react';
 export default function Rain() {
   const children = useMemo(() => {
     let increment = 0;
-    let nodes = [];
+    const nodes = [];
 
     while (increment < 95) {
-      let randoHundo = Math.floor(Math.random() * (98 - 1 + 1) + 1);
-      let randoFiver = Math.floor(Math.random() * (4 - 2 + 1) + 2);
+      const randoHundo = Math.floor(Math.random() * (98 - 1 + 1) + 1);
+      const randoFiver = Math.floor(Math.random() * (4 - 2 + 1) + 2);
       increment += randoFiver;
 
       nodes.push(

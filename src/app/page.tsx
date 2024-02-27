@@ -1,8 +1,8 @@
 'use client';
-import { getContract } from 'viem';
-import { useEffect, useMemo, useState } from 'react';
-import { useAccount, useWalletClient, useWriteContract } from 'wagmi';
+import { useEffect, useState } from 'react';
+import { useAccount, useWriteContract } from 'wagmi';
 import { toast } from 'sonner';
+import { FLIPPY_NFT_CONTRACT, STATE_CHAIN_GATEWAY } from '@/consts';
 
 const abi = [
   {
@@ -24,7 +24,7 @@ export default function Home() {
   const account = useAccount();
   const [input, setInput] = useState('');
   const [checked, setChecked] = useState(false);
-  const { writeContract, error, data } = useWriteContract();
+  const { writeContract, error } = useWriteContract();
 
   useEffect(() => {
     if (checked) {
@@ -47,7 +47,7 @@ export default function Home() {
               type="checkbox"
               id="mood"
               checked={checked}
-              onClick={() => {
+              onChange={() => {
                 setChecked(true);
               }}
             />
@@ -60,14 +60,10 @@ export default function Home() {
             onSubmit={(e) => {
               e.preventDefault();
               writeContract({
-                address: '0x68D5d4ff0274dD95760E300ef16b81C5eED09842', // flippy nft
+                address: FLIPPY_NFT_CONTRACT,
                 functionName: 'transferFrom',
                 abi,
-                args: [
-                  account.address,
-                  '0x6995Ab7c4D7F4B03f467Cf4c8E920427d9621DBd', // sc gateway
-                  input,
-                ],
+                args: [account.address, STATE_CHAIN_GATEWAY, input],
               });
             }}
           >
